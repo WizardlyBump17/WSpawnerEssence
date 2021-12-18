@@ -1,0 +1,11 @@
+dependencies {
+    compileOnly(
+            'org.projectlombok:lombok:1.18.22',
+            'org.jetbrains:annotations:22.0.0',
+            'org.spigotmc:spigot-api:1.18-R0.1-SNAPSHOT',
+            'com.wizardlybump17.wlib:core:1.3.0_2',
+            'com.wizardlybump17.wlib:adapter:1.3.0_2',
+            'com.wizardlybump17.wlib:utils:1.3.0_2'
+    )
+    annotationProcessor('org.projectlombok:lombok:1.18.22')
+}
