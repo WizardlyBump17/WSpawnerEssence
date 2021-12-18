@@ -6,8 +6,8 @@ import com.wizardlybump17.wspawneressence.api.EntityUtil;
 import com.wizardlybump17.wspawneressence.api.Essence;
 import com.wizardlybump17.wspawneressence.api.EssenceRecipe;
 import com.wizardlybump17.wspawneressence.api.EssenceTier;
-import net.minecraft.network.protocol.game.PacketPlayInAutoRecipe;
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -52,6 +52,9 @@ public record EntityListener(WSpawnerEssence plugin) implements Listener {
 //                    player.undiscoverRecipe(essenceRecipe.getKey());
             }
         }
+
+        ShapedRecipe recipe = (ShapedRecipe) Bukkit.getRecipe(new NamespacedKey(plugin, "husk_normal_essence"));
+        recipe.getChoiceMap().forEach((shape, choice) -> player.getInventory().addItem(choice.getItemStack()));
     }
 
     @EventHandler

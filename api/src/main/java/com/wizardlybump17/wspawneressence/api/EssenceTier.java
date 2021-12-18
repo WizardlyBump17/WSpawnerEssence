@@ -14,18 +14,21 @@ import org.bukkit.persistence.PersistentDataAdapterContext;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.awt.*;
-import java.util.Map;
 
 @Getter
 @RequiredArgsConstructor
 public enum EssenceTier {
 
-    BASE(ChatColor.WHITE, Item.builder().type(Material.COCOA_BEANS).customModelData(9).build()),
-    LOW(ChatColor.WHITE, Item.builder().type(Material.COCOA_BEANS).customModelData(10).build()),
-    NORMAL(ChatColor.GREEN, Item.builder().type(Material.LIME_DYE).customModelData(11).build()),
-    HIGH(ChatColor.of(new Color(141, 183, 241)), Item.builder().type(Material.LIGHT_BLUE_DYE).customModelData(12).build()),
-    EXTREME(ChatColor.GOLD, Item.builder().type(Material.ORANGE_DYE).customModelData(13).build()),
-    SUPREME(ChatColor.RED, Item.builder().type(Material.RED_DYE).customModelData(14).build());
+//    BASE(ChatColor.WHITE, Item.builder().type(Material.COCOA_BEANS).customModelData(9).build()),
+//    LOW(ChatColor.WHITE, Item.builder().type(Material.COCOA_BEANS).customModelData(10).build()),
+//    NORMAL(ChatColor.GREEN, Item.builder().type(Material.LIME_DYE).customModelData(11).build()),
+//    HIGH(ChatColor.of(new Color(141, 183, 241)), Item.builder().type(Material.LIGHT_BLUE_DYE).customModelData(12).build()),
+//    EXTREME(ChatColor.GOLD, Item.builder().type(Material.ORANGE_DYE).customModelData(13).build()),
+//    SUPREME(ChatColor.RED, Item.builder().type(Material.RED_DYE).customModelData(14).build());
+    BASE(ChatColor.WHITE, new ItemStack(Material.COCOA_BEANS)),
+    LOW(ChatColor.WHITE, new ItemStack(Material.COCOA_BEANS)),
+    NORMAL(ChatColor.GREEN, new ItemStack(Material.LIME_DYE)),
+    SUPREME(ChatColor.WHITE, new ItemStack(Material.RED_DYE));
 
     private final ChatColor color;
     private final ItemStack item;
