@@ -7,7 +7,9 @@ import com.wizardlybump17.wspawneressence.api.Essence;
 import com.wizardlybump17.wspawneressence.api.EssenceRecipe;
 import com.wizardlybump17.wspawneressence.api.EssenceTier;
 import net.minecraft.network.protocol.game.PacketPlayInAutoRecipe;
+import org.bukkit.Bukkit;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,11 +20,14 @@ import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
+import org.bukkit.inventory.ShapedRecipe;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Optional;
 
 public record EntityListener(WSpawnerEssence plugin) implements Listener {
@@ -31,8 +36,22 @@ public record EntityListener(WSpawnerEssence plugin) implements Listener {
         EssenceRecipe recipe = new EssenceRecipe(essence);
         EssenceRecipe nextRecipe = new EssenceRecipe(new Essence(essence.mob(), essence.tier().nextTier()));
 
-        player.discoverRecipe(recipe.getRecipe().getKey());
-        player.discoverRecipe(nextRecipe.getRecipe().getKey());
+        System.out.println(player.discoverRecipe(recipe.getRecipe().getKey()));
+        System.out.println(player.discoverRecipe(nextRecipe.getRecipe().getKey()));
+    }
+
+    @EventHandler
+    public void onJoin(PlayerJoinEvent event) {
+        Iterator<Recipe> iterator = Bukkit.recipeIterator();
+        Player player = event.getPlayer();
+        while (iterator.hasNext()) {
+            Recipe recipe = iterator.next();
+            if (recipe instanceof ShapedRecipe essenceRecipe) {
+                player.undiscoverRecipe(essenceRecipe.getKey());
+//                if (Essence.fromItem(recipe.getResult()).isPresent())
+//                    player.undiscoverRecipe(essenceRecipe.getKey());
+            }
+        }
     }
 
     @EventHandler
@@ -51,11 +70,11 @@ public record EntityListener(WSpawnerEssence plugin) implements Listener {
 
         ItemStack item = event.getItem().getItemStack();
 
-        Optional<Essence> optional = Essence.fromItem(item);
-        if (optional.isEmpty() || optional.get().mob() == null)
-            return;
+//        Optional<Essence> optional = Essence.fromItem(item);
+//        if (optional.isEmpty() || optional.get().mob() == null)
+//            return;
 
-        discoverRecipes(player, optional.get());
+        discoverRecipes(player, new Essence(EntityType.HUSK, EssenceTier.LOW));
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)

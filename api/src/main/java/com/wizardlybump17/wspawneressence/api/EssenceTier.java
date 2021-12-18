@@ -5,8 +5,13 @@ import com.wizardlybump17.wlib.util.StringUtil;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataAdapterContext;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.awt.*;
 import java.util.Map;
@@ -26,7 +31,17 @@ public enum EssenceTier {
     private final ItemStack item;
 
     public ItemStack getBaseItem() {
-        return Item.fromItemStack(item).displayName(getName()).nbtTag("WSpawnerEssence", Map.of("tier", name())).build();
+        ItemStack item = new ItemStack(this.item);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(getName());
+        meta.getPersistentDataContainer().set(
+                new NamespacedKey(Bukkit.getPluginManager().getPlugin("WSpawnerEssence"), "tier"),
+                PersistentDataType.STRING,
+                name()
+        );
+        item.setItemMeta(meta);
+        return item;
+//        return Item.fromItemStack(item).displayName(getName()).nbtTag("WSpawnerEssence", Map.of("tier", name())).build();
     }
 
     public EssenceTier previousTier() {

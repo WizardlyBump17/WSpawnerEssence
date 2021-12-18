@@ -11,7 +11,6 @@ import net.minecraft.network.protocol.game.PacketPlayOutCustomPayload;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.craftbukkit.v1_18_R1.util.CraftNamespacedKey;
-import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ShapedRecipe;
 
 public class PacketListener extends PacketAdapter {

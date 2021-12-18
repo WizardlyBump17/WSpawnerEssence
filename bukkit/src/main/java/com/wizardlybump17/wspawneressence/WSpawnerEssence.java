@@ -14,10 +14,15 @@ import com.wizardlybump17.wspawneressence.listener.EntityListener;
 import com.wizardlybump17.wspawneressence.listener.PacketListener;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Recipe;
+import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class WSpawnerEssence extends JavaPlugin {
